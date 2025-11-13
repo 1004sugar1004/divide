@@ -259,11 +259,11 @@ h1 {
 
 /* ==================== 게임 화면 ==================== */
 .game-container {
-    max-width: 1400px;
+    max-width: 1300px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 250px 1fr 250px;
-    gap: 20px;
+    grid-template-columns: 240px 1fr 240px;
+    gap: 15px;
     align-items: start;
 }
 
@@ -490,8 +490,8 @@ h1 {
 .game-board {
     position: relative;
     width: 100%;
-    max-width: 900px;
-    height: 700px;
+    max-width: 800px;
+    height: 650px;
 }
 
 .board-background {
@@ -690,12 +690,12 @@ h1 {
     .game-board {
         gap: 5px;
         max-width: 100%;
-        height: 500px;
+        height: 450px;
     }
     
     .board-cell {
-        font-size: 0.65em;
-        padding: 3px;
+        font-size: 0.6em;
+        padding: 2px;
     }
     
     .division-display {
