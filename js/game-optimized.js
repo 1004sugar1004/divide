@@ -397,7 +397,11 @@ function initializeBoard() {
         content.className = 'division-display';
         
         if (def.type === 'division') {
-            content.innerHTML = def.template.replace(/_/g, '<span class="blank-space"></span>').replace('÷', ' ÷ ');
+            // 나눗셈 표시: 피제수(분자)는 한 줄, ÷는 다음 줄, 제수(분모)는 그 다음 줄
+            const parts = def.template.split('÷');
+            const dividend = parts[0].replace(/_/g, '<span class="blank-space"></span>');
+            const divisor = parts[1].replace(/_/g, '<span class="blank-space"></span>');
+            content.innerHTML = `${dividend}<br>÷ ${divisor}`;
             gameState.boardCells[index] = { ...def, filledValue: null };
         } else {
             content.innerHTML = def.text.replace(/\n/g, '<br>');
@@ -551,10 +555,10 @@ function showProcessSteps(result) {
     }
     
     if (fillDisplay && currentCell?.template) {
-        const filledTemplate = currentCell.template
-            .replace('÷', ' ÷ ')
-            .replace('_', `<span class="highlight">${gameState.diceValue}</span>`);
-        fillDisplay.innerHTML = filledTemplate;
+        const parts = currentCell.template.split('÷');
+        const dividend = parts[0].replace('_', `<span class="highlight">${gameState.diceValue}</span>`);
+        const divisor = parts[1].replace('_', `<span class="highlight">${gameState.diceValue}</span>`);
+        fillDisplay.innerHTML = `${dividend}<br>÷ ${divisor}`;
     } else if (fillDisplay) {
         fillDisplay.innerHTML = '';
     }
@@ -659,10 +663,10 @@ function updateBoardCell(cellIndex, value = null) {
     const elem = document.querySelector(`[data-index="${cellIndex}"] .division-display`);
     
     if (cell?.type === 'division' && elem) {
-        const display = cell.template
-            .replace('÷', ' ÷ ')
-            .replace('_', value !== null ? `<span class="blank-space">${value}</span>` : '<span class="blank-space"></span>');
-        elem.innerHTML = display;
+        const parts = cell.template.split('÷');
+        const dividend = parts[0].replace('_', value !== null ? `<span class="blank-space">${value}</span>` : '<span class="blank-space"></span>');
+        const divisor = parts[1].replace('_', value !== null ? `<span class="blank-space">${value}</span>` : '<span class="blank-space"></span>');
+        elem.innerHTML = `${dividend}<br>÷ ${divisor}`;
     }
 }
 
