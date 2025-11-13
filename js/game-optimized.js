@@ -34,7 +34,7 @@ const BOARD_DEFINITIONS = [
     { type: 'division', template: '81_÷4', blank: 'dividend2' },
     { type: 'division', template: '45_÷5', blank: 'dividend2' },
     { type: 'special', text: '뒤로\n2칸\n이동' },
-    { type: 'division', template: '_4÷4', blank: 'dividend0' },
+    { type: 'division', template: '4_÷4', blank: 'dividend1' },
     { type: 'division', template: '8_÷2', blank: 'dividend1' },
     { type: 'division', template: '20_÷3', blank: 'dividend2' },
     { type: 'division', template: '92_÷4', blank: 'dividend2' },
