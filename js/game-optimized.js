@@ -221,24 +221,24 @@ const Division = {
         
         let match;
         
+        // Blank inside the dividend (e.g., 3_4÷8) - CHECK THIS FIRST
+        match = template.match(/^(\d+)_(\d+)÷(\d+)$/);
+        if (match) {
+            const dividend = parseInt(`${match[1]}${diceValue}${match[2]}`, 10);
+            const divisor = parseInt(match[3], 10);
+            return this.getResult(dividend, divisor);
+        }
+        
         // Blank in the hundreds/tens place of the dividend: _4÷8
-        match = template.match(/_(\d+)÷(\d+)/);
+        match = template.match(/^_(\d+)÷(\d+)$/);
         if (match) {
             const dividend = parseInt(`${diceValue}${match[1]}`, 10);
             const divisor = parseInt(match[2], 10);
             return this.getResult(dividend, divisor);
         }
         
-        // Blank inside the dividend (e.g., 3_4÷8)
-        match = template.match(/(\d+)_([0-9]+)÷(\d+)/);
-            if (match) {
-            const dividend = parseInt(`${match[1]}${diceValue}${match[2]}`, 10);
-            const divisor = parseInt(match[3], 10);
-            return this.getResult(dividend, divisor);
-        }
-        
         // Blank in the ones place of the dividend: 45_÷5, 5_÷3, etc.
-        match = template.match(/(\d+)_÷(\d+)/);
+        match = template.match(/^(\d+)_÷(\d+)$/);
         if (match) {
             const dividend = parseInt(`${match[1]}${diceValue}`, 10);
             const divisor = parseInt(match[2], 10);
@@ -246,15 +246,15 @@ const Division = {
         }
         
         // Blank in the tens place of the divisor: 8÷_4
-        match = template.match(/(\d+)÷_(\d+)/);
+        match = template.match(/^(\d+)÷_(\d+)$/);
         if (match) {
             const dividend = parseInt(match[1], 10);
             const divisor = parseInt(`${diceValue}${match[2]}`, 10);
-                return this.getResult(dividend, divisor);
-            }
+            return this.getResult(dividend, divisor);
+        }
         
         // Blank in the ones place of the divisor: 6÷4_
-        match = template.match(/(\d+)÷(\d+)_/);
+        match = template.match(/^(\d+)÷(\d+)_$/);
         if (match) {
             const dividend = parseInt(match[1], 10);
             const divisor = parseInt(`${match[2]}${diceValue}`, 10);
