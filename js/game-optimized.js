@@ -20,7 +20,7 @@ const BOARD_DEFINITIONS = [
     { type: 'division', template: '3_÷2', blank: 'dividend1' },
     { type: 'division', template: '3_4÷8', blank: 'dividendMiddle' },
     { type: 'division', template: '3_÷5', blank: 'dividend1' },
-    { type: 'division', template: '1_÷24', blank: 'dividend1' },
+    { type: 'division', template: '1_2÷4', blank: 'dividendMiddle' },
     { type: 'special', text: '뒤로\n2칸\n이동' },
     { type: 'division', template: '5_÷6', blank: 'dividend1' },
     { type: 'division', template: '_23÷7', blank: 'dividend0' },
