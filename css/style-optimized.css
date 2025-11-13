@@ -480,17 +480,17 @@ h1 {
 .board-wrapper {
     background: white;
     border-radius: var(--border-radius-lg);
-    padding: 30px;
+    padding: 20px;
     box-shadow: var(--box-shadow);
     display: flex;
     justify-content: center;
-    overflow-x: auto;
+    overflow: hidden;
 }
 
 .game-board {
     position: relative;
     width: 100%;
-    max-width: 1100px;
+    max-width: 900px;
     height: 700px;
 }
 
