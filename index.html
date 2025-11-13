@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나눗셈 탐험 보드게임</title>
+    <link rel="stylesheet" href="css/style-optimized.css">
+</head>
+<body>
+    <!-- 게임 시작 화면 -->
+    <div id="startScreen" class="screen active">
+        <div class="container">
+            <h1>🎲 나눗셈 탐험 보드게임</h1>
+            <p class="subtitle">1번 칸부터 시작! 주사위로 나눗셈을 만들고 나머지만큼 이동하세요!</p>
+            
+            <!-- 게임 방법 -->
+            <div class="game-rules">
+                <h3>📖 게임 방법</h3>
+                <ol class="rules-list">
+                    <li><span class="rule-number">①</span> 2명이면 가위바위보로 순서를 정합니다. <strong>(1번 칸부터 시작)</strong></li>
+                    <li><span class="rule-number">②</span> 주사위 1개를 던집니다.</li>
+                    <li><span class="rule-number">③</span> 자신의 말이 있는 곳의 <strong>□</strong> 안에 주사위 눈의 수를 써넣어 나눗셈을 만듭니다.<br>
+                        <small>(예: 1번 칸 "5_÷3"에서 주사위 5 → 55÷3)</small>
+                    </li>
+                    <li><span class="rule-number">④</span> 나눗셈을 계산하고, <strong>나머지만큼</strong> 앞으로 이동합니다.<br>
+                        <small>(단, 나머지가 0인 경우 말을 이동하지 않고 □ 안의 수를 지운 후 다음번에 다시 합니다.)</small>
+                    </li>
+                    <li><span class="rule-number">⑤</span> 먼저 도착하면 승리! (혼자 플레이는 최종 점수 확인)</li>
+                </ol>
+            </div>
+            
+            <div class="player-selection">
+                <h2>플레이어 수를 선택하세요</h2>
+                <div class="player-buttons">
+                    <button class="player-btn" onclick="selectPlayers(1)">혼자 플레이</button>
+                    <button class="player-btn" onclick="selectPlayers(2)">2명</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 순서 결정 화면 -->
+    <div id="rpsScreen" class="screen">
+        <div class="container">
+            <h1>🎲 플레이어 순서 정하는 중...</h1>
+            <div id="rpsPlayers"></div>
+            <div id="rpsResult"></div>
+            <button id="startGameBtn" class="hidden" onclick="startGame()">게임 시작!</button>
+        </div>
+    </div>
+
+    <!-- 게임 화면 -->
+    <div id="gameScreen" class="screen">
+        <div class="game-container">
+            <!-- 게임 정보 -->
+            <div class="game-info">
+                <div class="header-with-sound">
+                    <h2>🎲 나눗셈 탐험 보드게임</h2>
+                    <button id="soundToggle" class="sound-toggle" onclick="toggleSound()" title="소리 켜기/끄기">
+                        🔊
+                    </button>
+                </div>
+                
+                <!-- 게임 방법 토글 -->
+                <button class="rules-toggle" onclick="toggleGameRules()">
+                    📖 게임 방법 보기/숨기기
+                </button>
+                
+                <!-- 게임 방법 (축소판) -->
+                <div id="gameRulesInGame" class="game-rules-compact hidden">
+                    <ol class="rules-list-compact">
+                        <li><strong>①</strong> 가위바위보로 순서 결정</li>
+                        <li><strong>②</strong> 주사위 1개 던지기</li>
+                        <li><strong>③</strong> 자신의 말이 있는 곳의 □에 주사위 수 써넣기</li>
+                        <li><strong>④</strong> 나머지 계산 → 나머지만큼 이동<br>
+                            <small>(나머지 0이면 이동 안함)</small>
+                        </li>
+                        <li><strong>⑤</strong> 먼저 도착한 사람이 승리!</li>
+                    </ol>
+                </div>
+                
+                <div id="turnInfo" class="turn-info"></div>
+                <button id="rollDiceBtn" class="btn-primary" onclick="rollDice()">주사위 던지기</button>
+                <div id="diceResult" class="dice-result"></div>
+                
+                <!-- 단계별 과정 표시 -->
+                <div id="processSteps" class="process-steps hidden">
+                    <!-- 1단계: 주사위 값 표시 -->
+                    <div class="step-box">
+                        <h4>① 주사위 결과</h4>
+                        <div id="diceValueDisplay" class="value-display"></div>
+                    </div>
+                    
+                    <!-- 2단계: 빈칸에 숫자 넣기 -->
+                    <div class="step-box">
+                        <h4>② 빈칸에 써넣기</h4>
+                        <div id="fillBlankDisplay" class="value-display"></div>
+                    </div>
+                    
+                    <!-- 3단계: 나눗셈 계산 -->
+                    <div class="step-box">
+                        <h4>③ 나눗셈 계산</h4>
+                        <div id="calculationDisplay" class="value-display"></div>
+                    </div>
+                </div>
+                
+                <div id="divisionProblem" class="division-problem hidden"></div>
+                <div id="remainderChoices" class="remainder-choices hidden">
+                    <h3>④ 나머지를 선택하세요</h3>
+                    <div id="choiceButtons" class="choice-buttons"></div>
+                </div>
+                
+                <div id="messageBox" class="message-box"></div>
+            </div>
+
+            <!-- 보드판 -->
+            <div class="board-wrapper">
+                <div id="gameBoard" class="game-board"></div>
+            </div>
+
+            <!-- 플레이어 정보 -->
+            <div class="players-info" id="playersInfo"></div>
+        </div>
+    </div>
+
+    <!-- 게임 종료 화면 -->
+    <div id="endScreen" class="screen">
+        <div class="container">
+            <h1>🎉 게임 종료!</h1>
+            <div id="winnerInfo"></div>
+            <button class="btn-primary" onclick="location.reload()">다시 시작</button>
+        </div>
+    </div>
+
+    <script src="js/game-optimized.js"></script>
+</body>
+</html>
