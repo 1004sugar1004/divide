@@ -490,8 +490,8 @@ h1 {
 .game-board {
     position: relative;
     width: 100%;
-    max-width: 900px;
-    height: 600px;
+    max-width: 1100px;
+    height: 700px;
 }
 
 .board-background {
@@ -690,10 +690,11 @@ h1 {
     .game-board {
         gap: 5px;
         max-width: 100%;
+        height: 500px;
     }
     
     .board-cell {
-        font-size: 0.7em;
+        font-size: 0.65em;
         padding: 3px;
     }
     
