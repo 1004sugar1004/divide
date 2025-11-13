@@ -550,12 +550,12 @@ h1 {
 
 .cell-number {
     position: absolute;
-    top: 2px;
-    left: 4px;
-    font-size: 0.55em;
-    color: #999;
+    top: 1px;
+    left: 2px;
+    font-size: 0.4em;
+    color: #aaa;
     font-weight: normal;
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 .division-display {

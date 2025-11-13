@@ -724,44 +724,6 @@ function createBoardBackground(container) {
     edge.setAttribute('stroke-linejoin', 'round');
     svg.appendChild(edge);
     
-    const startCircle = document.createElementNS(svgNS, 'circle');
-    startCircle.setAttribute('cx', BOARD_POSITIONS[0].x);
-    startCircle.setAttribute('cy', BOARD_POSITIONS[0].y);
-    startCircle.setAttribute('r', 36);
-    startCircle.setAttribute('fill', 'rgba(132, 250, 176, 0.6)');
-    startCircle.setAttribute('stroke', '#2ecc71');
-    startCircle.setAttribute('stroke-width', '4');
-    svg.appendChild(startCircle);
-    
-    const startLabel = document.createElementNS(svgNS, 'text');
-    startLabel.setAttribute('x', BOARD_POSITIONS[0].x);
-    startLabel.setAttribute('y', BOARD_POSITIONS[0].y + 6);
-    startLabel.setAttribute('text-anchor', 'middle');
-    startLabel.setAttribute('font-size', '20');
-    startLabel.setAttribute('font-family', 'NanumSquare, sans-serif');
-    startLabel.setAttribute('fill', '#1b5e20');
-    startLabel.textContent = '출발';
-    svg.appendChild(startLabel);
-    
-    const endCircle = document.createElementNS(svgNS, 'circle');
-    endCircle.setAttribute('cx', BOARD_POSITIONS[BOARD_POSITIONS.length - 1].x);
-    endCircle.setAttribute('cy', BOARD_POSITIONS[BOARD_POSITIONS.length - 1].y);
-    endCircle.setAttribute('r', 40);
-    endCircle.setAttribute('fill', 'rgba(255, 235, 59, 0.6)');
-    endCircle.setAttribute('stroke', '#f39c12');
-    endCircle.setAttribute('stroke-width', '4');
-    svg.appendChild(endCircle);
-    
-    const endLabel = document.createElementNS(svgNS, 'text');
-    endLabel.setAttribute('x', BOARD_POSITIONS[BOARD_POSITIONS.length - 1].x);
-    endLabel.setAttribute('y', BOARD_POSITIONS[BOARD_POSITIONS.length - 1].y + 6);
-    endLabel.setAttribute('text-anchor', 'middle');
-    endLabel.setAttribute('font-size', '20');
-    endLabel.setAttribute('font-family', 'NanumSquare, sans-serif');
-    endLabel.setAttribute('fill', '#e65100');
-    endLabel.textContent = '도착';
-    svg.appendChild(endLabel);
-    
     container.appendChild(svg);
 }
 
